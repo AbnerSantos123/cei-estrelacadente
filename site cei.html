@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centro de Educação Infantil</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(
+        to bottom,
+        #f0fdf4 0%,
+        #f0fdf4 20%,
+        #81c784 50%,
+        #f0fdf4 80%,
+        #f0fdf4 100%
+      );
+      color: #333;
+      scroll-behavior: smooth;
+      text-align: center;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #a5d6a7;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    /* Espaço para inserir logo como imagem */
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-top: 10px;
+      margin-left: auto;
+      cursor: pointer;
+    }
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(76,175,80,0.4);
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      flex: 1;
+      text-align: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: #2e7d32;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #4caf50;
+    }
+    section {
+      padding: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      max-width: 900px;
+      margin: 0 auto 40px;
+      text-align: center;
+      background-color: rgba(255 255 255 / 0.85);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h1, h2 {
+      color: #388e3c;
+      margin-bottom: 20px;
+    }
+    /* Destaque para o slogan */
+    #inicio p.slogan {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2e7d32;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+    .highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      text-align: center;
+    }
+    .card {
+      background-color: #e8f5e9;
+      border-radius: 12px;
+      padding: 20px;
+      flex: 1 1 250px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .card h3::before {
+      content: "\f19d ";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 8px;
+      color: #66bb6a;
+    }
+    .button {
+      background-color: #66bb6a;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .button:hover {
+      background-color: #4caf50;
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(76,175,80,0.6);
+    }
+    h2::before {
+      content: "\f02d ";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 10px;
+      color: #66bb6a;
+    }
+    .icon-list {
+      list-style: none;
+      padding-left: 0;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .icon-list li::before {
+      content: "\f303 ";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 8px;
+      color: #4caf50;
+    }
+    .icon-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      justify-content: center;
+      text-align: center;
+    }
+    .icon-gallery i {
+      font-size: 30px;
+      color: #81c784;
+      animation: pulseJump 3s ease-in-out infinite;
+      cursor: default;
+    }
+    @keyframes pulseJump {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-10px) scale(1.1);
+        opacity: 0.85;
+      }
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    iframe {
+      max-width: 100%;
+      margin-top: 15px;
+      border-radius: 10px;
+    }
+    /* Estilo para fotos da galeria */
+    .gallery-photos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .gallery-photos img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-photos img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      .highlights {
+        flex-direction: column;
+      }
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      header .logo {
+        margin-left: 0;
+        margin-top: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#quem-somos">Quem Somos</a>
+      <a href="#proposta">Nossa Proposta</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#matriculas">Matrículas</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="logo">
+      <!-- Coloque aqui sua imagem de logo (formato círculo preferível) -->
+      <img src="logo-do-cei.png" alt="Logo CEI" />
+    </div>
+  </header>
+
+  <section id="inicio" class="visible">
+    <h1>Bem-vindos ao nosso CEI!</h1>
+    <p class="slogan">É preciso de uma aldeia intreira para educar uma criança</p>
+    <div class="highlights">
+      <div class="card">
+        <h3>Missão</h3>
+        <p>Educar com carinho, acolhimento e responsabilidade.</p>
+      </div>
+      <div class="card">
+        <h3>Diferenciais</h3>
+        <p>Alimentação saudável, equipe qualificada, pedagogia montessoriana.</p>
+      </div>
+      <div class="card">
+        <h3>Agende uma Visita</h3>
+        <a class="button" href="#matriculas">Clique aqui</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="quem-somos">
+    <h2>Quem Somos</h2>
+    <p>Somos um centro dedicado à educação infantil de forma lúdica, afetiva e pedagógica.</p>
+    <p>Nossa equipe pedagógica é formada por educadoras apaixonadas pela infância.</p>
+    <p>Seguimos éticos e sociais. Contamos com todas as autorizações e parcerias necessárias.</p>
+    <div class="icon-gallery">
+      <i class="fas fa-child"></i>
+      <i class="fas fa-chalkboard-teacher"></i>
+      <i class="fas fa-puzzle-piece"></i>
+      <i class="fas fa-hands-helping"></i>
+      <i class="fas fa-apple-alt"></i>
+    </div>
+    <br>
+    <img src="imagens/professoras.jpeg" alt="professoras" style="border-radius: 3%;">
+  </section>
+
+  <section id="proposta">
+    <h2>Nossa Proposta</h2>
+    <p>Adotamos uma metodologia sócio-interacionista com elementos da pedagogia montessoriana.</p>
+    <ul class="icon-list">
+      <li>Atendemos crianças de 0 a 6 anos.</li>
+      <li>Projetos como: musicalização, horta escolar, psicomotricidade e inglês lúdico.</li>
+      <li>Rotina com acolhida, brincadeiras dirigidas, refeições, descanso e atividades pedagógicas.</li>
+    </ul>
+  </section>
+
+  <section id="galeria">
+    <h2>Galeria</h2>
+    <p>Confira momentos especiais com nossas crianças em festas, atividades e eventos.</p>
+    <div class="icon-gallery">
+      <i class="fas fa-camera-retro"></i>
+      <i class="fas fa-image"></i>
+      <i class="fas fa-video"></i>
+    </div>
+
+    <!-- Exemplo de fotos da galera, substitua os src pelos seus arquivos -->
+    <div class="gallery-photos">
+      <img src="imagens/redário.jpeg" alt="Criança brincando" />
+      <img src="imagens/crianças.jpeg" alt="Atividade educativa" />
+      <img src="imagens/biblioteca.jpeg" alt="Crianças em roda" />
+      <img src="imagens/sala folha.jpeg" alt="Momento musicalização" />
+      <!-- Adicione mais imagens aqui -->
+    </div>
+  </section>
+
+  <section id="depoimentos">
+    <h2>Depoimentos</h2>
+    <blockquote>
+      "A equipe é maravilhosa! Minha filha ama ir para a escola todos os dias." – Ana Paula
+    </blockquote>
+    <blockquote>
+      "Ambiente seguro e acolhedor. Recomendo de olhos fechados." – Rodrigo Silva
+    </blockquote>
+  </section>
+
+  <section id="matriculas">
+    <h2>Matrículas / Agende uma Visita</h2>
+    <form>
+      <label>Nome do responsável:<br><input type="text" name="nome" required></label><br><br>
+      <label>Idade da criança:<br><input type="number" name="idade" required></label><br><br>
+      <label>Período desejado:<br>
+        <select name="periodo">
+          <option>Integral</option>
+          <option>Meio Período (manhã)</option>
+          <option>Meio Período (tarde)</option>
+        </select>
+      </label><br><br>
+      <button class="button" type="submit">Enviar</button>
+    </form>
+    <p>Ou entre em contato direto via <a href="https://wa.me/SEUNUMEROAQUI" target="_blank">WhatsApp</a>.</p>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>Endereço: Rua Doutor José Pereira Gomes, 79 - Itaim Paulista/SP</p>
+    <p>Telefone: (11) 5197-4644 | WhatsApp: (11) 97872-3074</p>
+    <p>Email: ceiestrelacadente@gmail.com</p>
+    <p>Funcionamento: Segunda à Sexta, das 7h às 17h</p>
+    <p>Siga-nos nas redes sociais:</p>
+    <ul class="icon-list">
+      <li><a href="https://www.instagram.com/cei_estrela.cadente/" target="_blank">Instagram</a></li>
+      <li><a href="https://facebook.com/CEI.estrelacadente" target="_blank">Facebook</a></li>
+    </ul>
+    <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.138050737912!2d-46.388261423761904!3d-23.49153655903248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce63666d1f7695%3A0x857b9548c4b49db1!2sR.%20Dr.%20Jos%C3%A9%20Pereira%20Gomes%2C%2079%20-%20Jardim%20das%20Oliveiras%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2008111-310!5e0!3m2!1spt-BR!2sbr!4v1752608966317!5m2!1spt-BR!2sbr" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe></p>
+  </section>
+
+  <script>
+    // Animação fade-in + slide-in nas seções ao rolar
+    const sections = document.querySelectorAll('section');
+
+    function revealSections() {
+      const triggerBottom = window.innerHeight * 0.85;
+
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+
+        if(sectionTop < triggerBottom) {
+          section.classList.add('visible');
+        } 
+      });
+    }
+
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+  </script>
+</body>
+</html>
